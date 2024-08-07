@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "h7jmtAVB2t4+cdbFwX92DqgdoPy4YtLzSZKK+Q/7pUSDXXoa5t3iBfnq/mHhIVk7VliVIXzzGUgKCrRazAHk6g==",
+  "success": true,
+  "projectFilePath": "/Users/breynolds/github/api-examples/dotnetExamples/commandLineWithCredentials/commandLineWithCredentials.csproj",
+  "expectedPackageFiles": [
+    "/Users/breynolds/.nuget/packages/identitymodel/7.0.0/identitymodel.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
