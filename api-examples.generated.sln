@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnetExamples", "dotnetExamples", "{BE08E3DF-A3D8-4AF2-A16C-C2C9A0F256E5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "commandLineWithCredentials", "dotnetExamples\commandLineWithCredentials\commandLineWithCredentials.csproj", "{2BB60239-58C4-42BD-9F4D-7F8A5326C21A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnetClientCredentials", "dotnetClientCredentials\dotnetClientCredentials.csproj", "{B8152261-0A57-40AA-8C22-3F58F9EEFE37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2BB60239-58C4-42BD-9F4D-7F8A5326C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BB60239-58C4-42BD-9F4D-7F8A5326C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BB60239-58C4-42BD-9F4D-7F8A5326C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BB60239-58C4-42BD-9F4D-7F8A5326C21A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8152261-0A57-40AA-8C22-3F58F9EEFE37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8152261-0A57-40AA-8C22-3F58F9EEFE37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8152261-0A57-40AA-8C22-3F58F9EEFE37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8152261-0A57-40AA-8C22-3F58F9EEFE37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{2BB60239-58C4-42BD-9F4D-7F8A5326C21A} = {BE08E3DF-A3D8-4AF2-A16C-C2C9A0F256E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65009D23-51AF-4748-9C01-182504A8DB78}

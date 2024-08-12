@@ -40,9 +40,9 @@ var tokenEndpoint = disco.TokenEndpoint;
 var tokenRequest = new ClientCredentialsTokenRequest
 {
 	Address = tokenEndpoint,
-	ClientId = "client",
+	ClientId = "demo-client",
 	ClientSecret = clientSecret,
-	Scope = "racingapi"
+	Scope = "demo racingapi"
 };
 var tokenResponse = await client.RequestClientCredentialsTokenAsync(tokenRequest);
 if(tokenResponse.IsError)
