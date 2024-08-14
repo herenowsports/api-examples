@@ -22,7 +22,6 @@ function Login() {
     if (auth.isAuthenticated) {
         return (
         <div>
-            <div><b>User sub:</b> {auth.user?.profile.sub}{" "}</div>
             <button onClick={() => {
                 auth.signoutRedirect({post_logout_redirect_uri: "http://localhost:3000"});
             }}>Log out</button>

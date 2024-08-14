@@ -59,23 +59,61 @@ function App() {
     fetchData();
   },[auth]);
 
+  const authenticationInfo = auth.isAuthenticated && 
+  (<div>
+    <h2>Authentication Info</h2>
+    <div><i>Default information in access token</i></div>
+    <br/>
+    <b>User sub:</b> {auth.user?.profile.sub}{" "}
+  </div>);
+
+
   const claimViews = claims.map((claim: any) => {
     return <div key={`${claim.type}_${claim.value}`}><b>{claim.type}</b>: {claim.value}</div>
   });
+  const claimsView = (auth.isAuthenticated && claims) && 
+    (<div>
+      <h2>Claims</h2>
+      <div><i>loaded from access token after authenticated</i></div>
+      <br/>
+      {claimViews}
+    </div>);
+
+
+  const userView = auth.isAuthenticated && (
+    <div>
+      <h2>Available User Info </h2>
+      <div><i>loaded from IDP profile endpoint if loadUserInfo=true</i></div>
+      <br/>
+      <div><b>First:</b> {auth.user?.profile?.given_name}</div>
+      <div><b>Last:</b> {auth.user?.profile?.family_name}</div>
+      <div><b>Email:</b> {auth.user?.profile?.email}</div>
+      </div>
+  )
+
+  const pingResponse = (auth.isAuthenticated && greeting) && (
+    <div>
+      <h2>API Response</h2>
+      <div><i>Retrieved from API by supplying access token as bearer token</i></div>
+      <br/>
+      <b>Anonymous Ping:</b> {greeting}
+    </div>);
+
 
   return (
     <div className="App">
       <h1>My HereNow App</h1>
 
-      <div><b>Anonymous Ping:</b> {greeting}</div>
       
       <Login/>
 
-      {claims && 
-        (<div>
-          <h2>Claims</h2>
-          {claimViews}
-        </div>)}
+      {authenticationInfo}
+
+      {claimsView}
+
+      {userView}
+
+      {pingResponse}
     </div>
   );
 }

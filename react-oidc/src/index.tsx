@@ -10,6 +10,7 @@ const oidcConfig = {
   client_id: "reactjs",
   redirect_uri: "http://localhost:3000",
   scope: "openid email profile racingapi offline_access",
+  loadUserInfo: true, // turn this on if you want to automatically call the profile endpoint to retrieve first name, last name, email, etc...
   onSigninCallback: () => {
     window.location.replace("/");
   }
