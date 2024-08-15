@@ -10,7 +10,8 @@ function App() {
   useEffect(()=>{
     const fetchData = async () => {
       try{
-        const response = await fetch("https://racingapi.herenow.com/ping/anonymous");
+        const url = "https://racingapi.herenow.com/ping/anonymous";
+        const response = await fetch(url);
         if(response.ok){
           const data = await response.text();
           setGreeting(data);

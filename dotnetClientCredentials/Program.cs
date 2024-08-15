@@ -2,26 +2,33 @@
 using System.Text.Json;
 using IdentityModel.Client;
 
-Console.WriteLine("Usage: dotnet run <client_secret> [optional IDP URL] [optional API Base URL]");
+Console.WriteLine("Usage: dotnet run <client_id> <client_secret> [optional IDP URL] [optional API Base URL]");
 
 if (args.Length < 1)
+{
+	Console.WriteLine("Please provide a client ID");
+	return;
+}
+var clientId = args[0];
+
+if (args.Length < 2)
 {
 	Console.WriteLine("Please provide a client secret");
 	return;
 }
-var clientSecret = args[0];
+var clientSecret = args[1];
 
 // If the user provides an IDP URL, use that. Otherwise, use the public server
 string idpUrl = "https://idp.herenow.com";
-if (args.Length > 1)
+if (args.Length > 2)
 {
-	idpUrl = args[1];
+	idpUrl = args[2];
 }
 
 var apiBaseUrl = "https://racingapi.herenow.com";
-if (args.Length > 2)
+if (args.Length > 3)
 {
-	apiBaseUrl = args[2];
+	apiBaseUrl = args[3];
 }
 
 // IdentityModel adds an extension onto the standard HttpClient to read OAUTH discovery documents
@@ -40,9 +47,9 @@ var tokenEndpoint = disco.TokenEndpoint;
 var tokenRequest = new ClientCredentialsTokenRequest
 {
 	Address = tokenEndpoint,
-	ClientId = "demo-client",
+	ClientId = clientId,
 	ClientSecret = clientSecret,
-	Scope = "demo racingapi"
+	Scope = "racingapi"
 };
 var tokenResponse = await client.RequestClientCredentialsTokenAsync(tokenRequest);
 if(tokenResponse.IsError)
@@ -60,15 +67,28 @@ var token = tokenResponse.AccessToken!;
 var apiClient = new HttpClient();
 apiClient.SetBearerToken(token);
 
-var response = await apiClient.GetAsync($"{apiBaseUrl}/ping/clientcred");
-if(!response.IsSuccessStatusCode)
+var pingResponse = await apiClient.GetAsync($"{apiBaseUrl}/ping/authenticated");
+if(!pingResponse.IsSuccessStatusCode)
 {
-	Console.WriteLine(response.StatusCode);
+	Console.WriteLine($"API Ping Error Response: {pingResponse.StatusCode}");
 }
 else
 {
-	var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync()).RootElement;
+	var json = JsonDocument.Parse(await pingResponse.Content.ReadAsStringAsync()).RootElement;
 	var prettyApiResponse = JsonSerializer.Serialize(json, 
 		new JsonSerializerOptions { WriteIndented = true });
-	Console.WriteLine($"API Response:\n{prettyApiResponse}");
+	Console.WriteLine($"API Ping Response:\n{prettyApiResponse}");
+}
+
+var permissionsResponse = await apiClient.GetAsync($"{apiBaseUrl}/clientpermissions/myclientpermissions");
+if(!permissionsResponse.IsSuccessStatusCode)
+{
+	Console.WriteLine($"API Permissions Error Response: {permissionsResponse.StatusCode}");
+}
+else
+{
+	var json = JsonDocument.Parse(await permissionsResponse.Content.ReadAsStringAsync()).RootElement;
+	var prettyApiResponse = JsonSerializer.Serialize(json, 
+		new JsonSerializerOptions { WriteIndented = true });
+	Console.WriteLine($"API Permissions Response:\n{prettyApiResponse}");
 }
